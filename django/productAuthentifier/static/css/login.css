@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #51adcf;
+}
+
+.login {
+    width: 40%;
+    padding: 10px;
+    text-align: center;
+    margin-left: 30%;
+    margin-top: 100px;
+    background-color: white;
+}
+
+.login h4 {
+    font-weight: 300;
+    font-size: 16px;
+    margin-top: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.login .input-group {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 15px;
+}
+
+.login .input-group .form-control {
+    color: #0278ae;
+    font-size: 14px;
+}
+
+.login button {
+    width: 60%;
+    margin-top: 15px;
+}
+
+.login .loginbtn {
+    border-style: none;
+    background-color: #0278ae;
+    font-size: 15px;
+    padding: 10px;
+    color: white;
+}
+
+.login .cancelbtn {
+    margin-top: 40px;
+    border-style: none;
+    background: transparent;
+    font-size: 13px;
+    color: red;
+}

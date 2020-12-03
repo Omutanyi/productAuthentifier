@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Product Authentifier</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- bootstrap icon import-->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <script type="text/javascript" src="{% static 'js/landing.js' %}"></script>
+  </head>
+  <body>
+    <div class="mainHeader">
+      <div class="topHeader">
+        <!-- <h4>PRODUCT AUTHENTIFIER</h4> -->
+
+        {% if user.is_authenticated %}
+        <p style="color: gold">Welcome, {{user.username}}</p>
+        <!-- <button class="login" >ADD PRODUCT</button> -->
+        <button class="login" onclick="location.href='accounts/logout'">
+          LOG OUT
+        </button>
+        {% else %}
+        <button class="login" onclick="location.href='accounts/login'">
+          LOGIN
+        </button>
+        {% endif %}
+      </div>
+      <div class="bottomHeader">
+        <!-- <div class="prodlogo">
+                    <img src="{% static 'img/prodLogo.png' %}">
+                </div> -->
+        <h4>
+          Check for authenticity of goods and reduce your chances of purchasing
+          counterfeit goods.
+        </h4>
+      </div>
+    </div>
+    <div class="content">
+        <!----             Options ---------------->
+	<div class="optionsDiv" id="optionsId" style="display: none;">
+		<i class="material-icons" onclick="closeOptions()">close</i>
+		<h6> Choose an option</h6>
+		<div class="optionsDiv-Container">
+            <button onclick="showProductOptions()">Add Product</button>
+            <button onclick="showBatchOptions()">Add Batch</button>
+		</div>
+    </div>
+    <!----             Add product ---------------->
+	<form class="optionsDiv" id="productOptionsId" method="POST" style="display: none;">
+        {% csrf_token %}
+		<i class="material-icons" onclick="closeProductOptions()">close</i>
+		<h6> Add Product</h6>
+		<div class="optionsDiv-Container">
+            <input type="text" name="name" placeholder="Product name">
+            <input type="text" name="company" placeholder="Company name">
+            <input type="text" name="category" placeholder="Product category">
+            <input type="text" name="description" placeholder="Description">
+            <input type="file" name="myfile">
+            <button type="submit" name="add_product">Save Product</button>
+            {% for message in messages%}
+            <p>{{message}}</p>
+            {% endfor %}
+		</div>
+    </form>
+    <!----             Add batch ---------------->
+	<div class="optionsDiv" id="batchOptionsId" style="display: none;">
+		<i class="material-icons" onclick="closeBatchOptions()">close</i>
+		<h6> Add Batch</h6>
+		<div class="optionsDiv-Container">
+		</div>
+    </div>
+      <div class="left-filter">
+        <h4>FILTER PRODUCTS</h4>
+        <input
+          type="text"
+          placeholder="Category"
+          name="Category"
+          list="Category"
+        />
+        <datalist id="Category">
+          <option value="Electronics"></option>
+          <option value="Groceries"></option>
+        </datalist>
+
+        <input
+          type="text"
+          placeholder="Company"
+          name="Company"
+          list="Company"
+        />
+        <datalist id="Company">
+          <option value="Bidco"></option>
+          <option value="Unilever"></option>
+        </datalist>
+
+        <button class="apply">APPLY</button>
+      </div>
+
+      <div class="products-container">
+        {% if user.is_authenticated %}
+        <div onclick="showOptions()" class="float">
+          <i class="material-icons my-float">add</i>
+        </div>
+        {% endif %}
+        {% for prod in prods %}
+
+        <div class="product">
+          <div class="product-header">
+            <div class="details">
+              <h5>{{prod.name}}</h5>
+              <p>{{prod.company}}</p>
+              <p>{{prod.category}}</p>
+              <div class="product-description">
+                <div class="description">
+                  <p>{{prod.description}}</p>
+                  {% for image in img %}
+                  <div>{{image}}</div>
+                  {% endfor %}
+                </div>
+                <!-- <p class="more">view more</p> -->
+                {% if user.is_authenticated %}
+                <div class="more-content">
+                  <h6>Batch Releases</h6>
+                  <ul>
+                    <li>
+                      <p>23 may 2017 - 27 may 2018</p>
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </li>
+                    <li>
+                      <p>23 may 2017 - 27 may 2018</p>
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </li>
+                    <li>
+                      <p>23 may 2017 - 27 may 2018</p>
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </li>
+                    <li>
+                      <p>23 may 2017 - 27 may 2018</p>
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </li>
+                  </ul>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="image">
+              <img src="{{prod.img.url}}" />
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <script src="" async defer></script>
+  </body>
+</html>
